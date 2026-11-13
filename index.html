@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Bajaj Finance Limited (BFL) - High-performance financial portfolio, products, metrics, and investment calculator." />
+  <title>Bajaj Finance Limited | Financial Portfolio & Showcase</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Real-time Market Top Ticker Strip -->
+  <div class="top-ticker-bar" aria-label="Live Market Quotes">
+    <div class="ticker-track">
+      <div class="ticker-content" id="tickerContent">
+        <span class="ticker-item"><strong class="ticker-symbol">BAJFINANCE (NSE)</strong> <span class="ticker-price" id="bajfinPrice">₹6,942.50</span> <span class="ticker-change up" id="bajfinChange">▲ +1.84% (+₹125.40)</span></span>
+        <span class="ticker-separator">•</span>
+        <span class="ticker-item"><strong class="ticker-symbol">BAJAJFINSV (NSE)</strong> <span>₹1,612.30</span> <span class="ticker-change up">▲ +1.12%</span></span>
+        <span class="ticker-separator">•</span>
+        <span class="ticker-item"><strong class="ticker-symbol">NIFTY 50</strong> <span>23,532.70</span> <span class="ticker-change up">▲ +0.68%</span></span>
+        <span class="ticker-separator">•</span>
+        <span class="ticker-item"><strong class="ticker-symbol">BSE SENSEX</strong> <span>77,580.10</span> <span class="ticker-change up">▲ +0.72%</span></span>
+        <span class="ticker-separator">•</span>
+        <span class="ticker-item"><strong class="ticker-symbol">CRISIL / ICRA</strong> <span class="ticker-badge">AAA / Stable (Highest Safety)</span></span>
+        <span class="ticker-separator">•</span>
+        <!-- Duplicate for continuous scroll loop -->
+        <span class="ticker-item"><strong class="ticker-symbol">BAJFINANCE (NSE)</strong> <span>₹6,942.50</span> <span class="ticker-change up">▲ +1.84%</span></span>
+        <span class="ticker-separator">•</span>
+        <span class="ticker-item"><strong class="ticker-symbol">NIFTY FINANCIAL</strong> <span>23,890.40</span> <span class="ticker-change up">▲ +0.94%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Glassmorphic Header & Navigation -->
+  <header class="site-header" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Bajaj Finance Limited">
+        <div class="logo-crest">
+          <svg viewBox="0 0 40 40" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="10" fill="url(#brandGrad)" />
+            <path d="M11 28V12L20 18L11 24V28Z" fill="#FFFFFF" />
+            <path d="M20 18L29 12V24L20 18Z" fill="#E5A93C" />
+            <path d="M14 26L20 22L26 26H14Z" fill="#FFFFFF" opacity="0.8" />
+            <defs>
+              <linearGradient id="brandGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0072BC" />
+                <stop offset="1" stop-color="#0B2545" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">BAJAJ FINANCE</span>
+          <span class="brand-sub">LIMITED • NBFC</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link active">Overview</a></li>
+          <li><a href="#metrics" class="nav-link">Key Metrics</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="#calculator" class="nav-link">FD Calculator</a></li>
+          <li><a href="#performance" class="nav-link">Performance</a></li>
+          <li><a href="#milestones" class="nav-link">Milestones</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Action Elements -->
+      <div class="nav-actions">
+        <!-- Live Ticker Pill -->
+        <div class="stock-pill" title="Live Market Simulation">
+          <span class="pulse-dot"></span>
+          <span class="pill-sym">BAJFIN</span>
+          <span class="pill-val" id="pillPrice">₹6,942.50</span>
+          <span class="pill-chg up" id="pillChg">+1.8%</span>
+        </div>
+
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="theme-btn" id="themeToggle" aria-label="Toggle dark/light theme" title="Toggle Theme">
+          <i data-lucide="moon" class="theme-icon-moon"></i>
+          <i data-lucide="sun" class="theme-icon-sun"></i>
+        </button>
+
+        <!-- CTA Apply / Invest Now Button -->
+        <button class="btn btn-primary btn-glow" id="openApplyModalBtn">
+          <span>Invest Now</span>
+          <i data-lucide="arrow-up-right" class="btn-icon"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link">Overview</a></li>
+        <li><a href="#metrics" class="mobile-nav-link">Key Metrics</a></li>
+        <li><a href="#portfolio" class="mobile-nav-link">Portfolio & Solutions</a></li>
+        <li><a href="#calculator" class="mobile-nav-link">Investment Calculator</a></li>
+        <li><a href="#performance" class="mobile-nav-link">Stock Performance</a></li>
+        <li><a href="#milestones" class="mobile-nav-link">Growth Milestones</a></li>
+      </ul>
+      <div class="mobile-drawer-footer">
+        <button class="btn btn-primary btn-full" id="mobileModalBtn">
+          <span>Apply Online / Invest</span>
+          <i data-lucide="arrow-up-right"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+      </div>
+      <div class="container hero-container">
+        <!-- Hero Content (Left) -->
+        <div class="hero-content" data-animate="fade-up">
+          <div class="badge-pill">
+            <span class="badge-dot"></span>
+            <span>India's Leading Diversified NBFC & Digital Powerhouse</span>
+          </div>
+          <h1 class="hero-title">
+            Empowering 88M+ Dreams With
+            <span class="text-gradient">Financial Excellence</span>
+          </h1>
+          <p class="hero-description">
+            From zero-cost consumer durable EMIs and premier fixed deposits to custom business financing and wealth advisory, Bajaj Finance Limited transforms aspirations into reality through frictionless digital finance.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#portfolio" class="btn btn-primary btn-lg">
+              <span>Explore Products</span>
+              <i data-lucide="chevron-right" class="btn-icon"></i>
+            </a>
+            <a href="#calculator" class="btn btn-outline btn-lg">
+              <i data-lucide="calculator" class="btn-icon"></i>
+              <span>Calculate Returns</span>
+            </a>
+          </div>
+
+          <!-- Trust Badges Row -->
+          <div class="trust-row">
+            <div class="trust-item">
+              <i data-lucide="shield-check" class="trust-icon"></i>
+              <div class="trust-meta">
+                <span class="trust-title">CRISIL AAA & ICRA AAA</span>
+                <span class="trust-desc">Highest credit safety rating</span>
+              </div>
+            </div>
+            <div class="trust-divider"></div>
+            <div class="trust-item">
+              <i data-lucide="award" class="trust-icon gold"></i>
+              <div class="trust-meta">
+                <span class="trust-title">38+ Years of Trust</span>
+                <span class="trust-desc">RBI registered systemic NBFC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Showcase (Right) -->
+        <div class="hero-visual" data-animate="fade-left">
+          <div class="visual-card-wrapper" id="heroCardWrapper">
+            <!-- Simulated Glassmorphic Credit / Investment Card -->
+            <div class="fin-card main-card">
+              <div class="card-chip"></div>
+              <div class="card-brand">
+                <span class="card-logo-txt">BAJAJ FINSERV</span>
+                <span class="card-type">INSTA EMI CARD</span>
+              </div>
+              <div class="card-number">4028 •••• •••• 9821</div>
+              <div class="card-footer-row">
+                <div>
+                  <span class="card-label">PRE-APPROVED LIMIT</span>
+                  <span class="card-val">₹3,00,000</span>
+                </div>
+                <div>
+                  <span class="card-label">PARTNER STORES</span>
+                  <span class="card-val">1,50,000+</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Badge 1: AAA Safety -->
+            <div class="floating-badge badge-top-right float-anim-1">
+              <div class="badge-icon-box bg-gold">
+                <i data-lucide="lock" class="icon-sm"></i>
+              </div>
+              <div>
+                <span class="f-title">Highest Safety</span>
+                <span class="f-sub">CRISIL AAA / ICRA AAA</span>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2: Customer Base -->
+            <div class="floating-badge badge-bottom-left float-anim-2">
+              <div class="badge-icon-box bg-blue">
+                <i data-lucide="users" class="icon-sm"></i>
+              </div>
+              <div>
+                <span class="f-title">88.11 Million+</span>
+                <span class="f-sub">Active Customer Franchise</span>
+              </div>
+            </div>
+
+            <!-- Floating Badge 3: AUM Scale -->
+            <div class="floating-badge badge-bottom-right float-anim-3">
+              <div class="badge-icon-box bg-cyan">
+                <i data-lucide="trending-up" class="icon-sm"></i>
+              </div>
+              <div>
+                <span class="f-title">₹3,54,000+ Cr</span>
+                <span class="f-sub">Consolidated AUM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Key Financial Highlights (Animated Counters) -->
+    <section class="section-metrics" id="metrics">
+      <div class="container">
+        <div class="metrics-card-bar" data-animate="fade-up">
+          <div class="metric-col">
+            <span class="metric-prefix">₹</span>
+            <span class="metric-value" data-counter="354100" data-format="inr-cr">0</span>
+            <span class="metric-suffix"> Cr</span>
+            <span class="metric-label">Assets Under Management</span>
+            <span class="metric-growth positive">▲ +35% YoY</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-col">
+            <span class="metric-value" data-counter="88.2" data-decimals="1">0</span>
+            <span class="metric-suffix">M+</span>
+            <span class="metric-label">Active Customer Franchise</span>
+            <span class="metric-growth positive">▲ +3.8M New / Qtr</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-col">
+            <span class="metric-prefix">₹</span>
+            <span class="metric-value" data-counter="14451" data-format="inr-cr">0</span>
+            <span class="metric-suffix"> Cr</span>
+            <span class="metric-label">Consolidated Net Profit (PAT)</span>
+            <span class="metric-growth positive">▲ +26% Robust Growth</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-col">
+            <span class="metric-value" data-counter="22.5" data-decimals="1">0</span>
+            <span class="metric-suffix">%</span>
+            <span class="metric-label">Capital Adequacy (CRAR)</span>
+            <span class="metric-growth neutral">Tier-1: 21.6%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Business & Product Portfolio Grid -->
+    <section class="section-portfolio" id="portfolio">
+      <div class="container">
+        <div class="section-header text-center" data-animate="fade-up">
+          <div class="badge-pill mx-auto">
+            <i data-lucide="layers" class="icon-xs"></i>
+            <span>Diversified Offerings</span>
+          </div>
+          <h2 class="section-title">Comprehensive Financial Solutions</h2>
+          <p class="section-subtitle">
+            Tailored financial products architected for individuals, SMEs, and commercial institutions with swift digital approvals and transparent terms.
+          </p>
+
+          <!-- Portfolio Category Filter Tabs -->
+          <div class="filter-tabs" role="tablist" aria-label="Portfolio Filters">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="lending">Consumer Lending</button>
+            <button class="filter-btn" data-filter="wealth">Deposits & Wealth</button>
+            <button class="filter-btn" data-filter="sme">Commercial & SME</button>
+            <button class="filter-btn" data-filter="cards">Cards & Payments</button>
+          </div>
+        </div>
+
+        <!-- Product Cards Grid with 3D Tilt Effect -->
+        <div class="portfolio-grid" id="portfolioGrid">
+          <!-- Card 1: Consumer Durable & Digital EMI -->
+          <div class="product-card" data-category="lending" data-tilt>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-blue-subtle">
+                  <i data-lucide="tv" class="prod-icon"></i>
+                </div>
+                <span class="rate-badge">0% Interest EMI</span>
+              </div>
+              <h3 class="prod-title">Consumer Durable & Digital Loans</h3>
+              <p class="prod-desc">
+                Instant financing for smartphones, electronics, home appliances, and lifestyle products across 1.5 Lakh+ partner stores with zero-cost EMI plans.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Instant in-store digital approval</li>
+                <li><i data-lucide="check-circle-2"></i> Flexible tenures up to 24 months</li>
+                <li><i data-lucide="check-circle-2"></i> Minimal documentation with PAN</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="Consumer Durable Loans">
+                  <span>Explore Financing</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Fixed Deposits -->
+          <div class="product-card featured" data-category="wealth" data-tilt>
+            <div class="popular-ribbon">Most Preferred</div>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-gold-subtle">
+                  <i data-lucide="vault" class="prod-icon gold"></i>
+                </div>
+                <span class="rate-badge gold-badge">Up to 8.85% p.a.</span>
+              </div>
+              <h3 class="prod-title">Bajaj Finance Fixed Deposits</h3>
+              <p class="prod-desc">
+                Guaranteed high yields with highest safety rating of CRISIL AAA and ICRA AAA. Flexible payout modes (Monthly, Quarterly, Maturity) with senior citizen perks.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Up to 8.85% interest for Seniors</li>
+                <li><i data-lucide="check-circle-2"></i> 100% paperless digital FD opening</li>
+                <li><i data-lucide="check-circle-2"></i> CRISIL AAA & ICRA AAA safety</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="Fixed Deposits">
+                  <span>Book FD Online</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Mutual Funds & Wealth Advisory -->
+          <div class="product-card" data-category="wealth" data-tilt>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-cyan-subtle">
+                  <i data-lucide="pie-chart" class="prod-icon cyan"></i>
+                </div>
+                <span class="rate-badge">1,000+ Direct Funds</span>
+              </div>
+              <h3 class="prod-title">Mutual Funds & Wealth Advisory</h3>
+              <p class="prod-desc">
+                Curated equity, debt, and hybrid mutual fund portfolios with zero commission on direct plans and intelligent robo-insights for long-term compounding.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Start SIPs from just ₹100/mo</li>
+                <li><i data-lucide="check-circle-2"></i> 0% commission on direct plans</li>
+                <li><i data-lucide="check-circle-2"></i> Instant portfolio rebalancing</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="Mutual Funds">
+                  <span>Start Investing</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: SME & Commercial Business Financing -->
+          <div class="product-card" data-category="sme" data-tilt>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-blue-subtle">
+                  <i data-lucide="briefcase" class="prod-icon"></i>
+                </div>
+                <span class="rate-badge">Up to ₹50 Lakhs</span>
+              </div>
+              <h3 class="prod-title">SME & Commercial Loans</h3>
+              <p class="prod-desc">
+                Collateral-free working capital, equipment financing, and expansion loans engineered to empower Indian entrepreneurs, manufacturers, and retailers.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Fast track disbursal in 48 hours</li>
+                <li><i data-lucide="check-circle-2"></i> Flexi-hybrid loan repayment</li>
+                <li><i data-lucide="check-circle-2"></i> Dropline overdraft facility</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="SME Business Loans">
+                  <span>Apply for Business Loan</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Bajaj Finserv Insta EMI Card -->
+          <div class="product-card" data-category="cards" data-tilt>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-purple-subtle">
+                  <i data-lucide="credit-card" class="prod-icon purple"></i>
+                </div>
+                <span class="rate-badge">Instant Pre-approved</span>
+              </div>
+              <h3 class="prod-title">Bajaj Finserv Insta EMI Card</h3>
+              <p class="prod-desc">
+                Convert your shopping bills into easy no-cost EMIs across top e-commerce platforms like Amazon, Flipkart, and leading retail stores nationwide.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Digital card activation in 2 mins</li>
+                <li><i data-lucide="check-circle-2"></i> Pre-approved limit up to ₹3,00,000</li>
+                <li><i data-lucide="check-circle-2"></i> Accepted at 1.5 Lakh+ merchants</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="Insta EMI Card">
+                  <span>Get Your Card</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Gold Loan & Secured Lending -->
+          <div class="product-card" data-category="lending" data-tilt>
+            <div class="product-card-inner">
+              <div class="card-icon-header">
+                <div class="product-icon-wrap bg-gold-subtle">
+                  <i data-lucide="coins" class="prod-icon gold"></i>
+                </div>
+                <span class="rate-badge">From 9.50% p.a.</span>
+              </div>
+              <h3 class="prod-title">Gold Loan & Secured Lending</h3>
+              <p class="prod-desc">
+                Unlock immediate cash liquidity against gold jewelry with high per-gram rates, free insurance, and transparent valuation at 3,500+ branches.
+              </p>
+              <ul class="prod-features">
+                <li><i data-lucide="check-circle-2"></i> Doorstep gold valuation service</li>
+                <li><i data-lucide="check-circle-2"></i> Multiple repayment schemes</li>
+                <li><i data-lucide="check-circle-2"></i> Complementary vault insurance</li>
+              </ul>
+              <div class="card-bottom">
+                <button class="btn-card-action" data-product="Gold Loan">
+                  <span>Get Gold Valuation</span>
+                  <i data-lucide="arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Interactive Investment / Returns Calculator -->
+    <section class="section-calculator" id="calculator">
+      <div class="container">
+        <div class="calc-wrapper" data-animate="fade-up">
+          <div class="calc-grid">
+            <!-- Left: Interactive Controls -->
+            <div class="calc-controls">
+              <div class="badge-pill">
+                <i data-lucide="trending-up" class="icon-xs"></i>
+                <span>Smart Returns Estimator</span>
+              </div>
+              <h2 class="calc-title">Fixed Deposit Return Calculator</h2>
+              <p class="calc-subtitle">
+                Simulate your wealth accumulation with India's highest rated corporate fixed deposit.
+              </p>
+
+              <!-- Investor Type Switcher -->
+              <div class="calc-field-group">
+                <label class="field-label">Investor Category</label>
+                <div class="citizen-toggle-group">
+                  <button type="button" class="citizen-btn active" data-citizen="regular">
+                    <span>Regular Citizen</span>
+                    <small>8.50% p.a.</small>
+                  </button>
+                  <button type="button" class="citizen-btn" data-citizen="senior">
+                    <span>Senior Citizen (+0.35%)</span>
+                    <small>8.85% p.a.</small>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Slider 1: Investment Principal -->
+              <div class="calc-field-group">
+                <div class="slider-header">
+                  <label for="principalSlider" class="field-label">Investment Amount</label>
+                  <div class="slider-display" id="principalDisplay">₹5,00,000</div>
+                </div>
+                <input
+                  type="range"
+                  id="principalSlider"
+                  class="custom-range"
+                  min="25000"
+                  max="5000000"
+                  step="25000"
+                  value="500000"
+                  aria-label="Investment Amount"
+                />
+                <!-- Preset chips -->
+                <div class="preset-chips">
+                  <button type="button" class="chip" data-amount="100000">₹1 Lakh</button>
+                  <button type="button" class="chip" data-amount="300000">₹3 Lakh</button>
+                  <button type="button" class="chip active" data-amount="500000">₹5 Lakh</button>
+                  <button type="button" class="chip" data-amount="1000000">₹10 Lakh</button>
+                  <button type="button" class="chip" data-amount="2500000">₹25 Lakh</button>
+                </div>
+              </div>
+
+              <!-- Slider 2: Tenure -->
+              <div class="calc-field-group">
+                <div class="slider-header">
+                  <label for="tenureSlider" class="field-label">Investment Tenure</label>
+                  <div class="slider-display" id="tenureDisplay">36 Months (3 Years)</div>
+                </div>
+                <input
+                  type="range"
+                  id="tenureSlider"
+                  class="custom-range"
+                  min="12"
+                  max="60"
+                  step="12"
+                  value="36"
+                  aria-label="Investment Tenure in Months"
+                />
+                <div class="range-marks">
+                  <span>12 Mo</span>
+                  <span>24 Mo</span>
+                  <span>36 Mo</span>
+                  <span>48 Mo</span>
+                  <span>60 Mo</span>
+                </div>
+              </div>
+
+              <!-- Payout Frequency -->
+              <div class="calc-field-group">
+                <label class="field-label">Payout Frequency</label>
+                <div class="payout-options">
+                  <label class="payout-radio">
+                    <input type="radio" name="payoutFreq" value="cumulative" checked />
+                    <span>At Maturity (Cumulative)</span>
+                  </label>
+                  <label class="payout-radio">
+                    <input type="radio" name="payoutFreq" value="annual" />
+                    <span>Annually</span>
+                  </label>
+                  <label class="payout-radio">
+                    <input type="radio" name="payoutFreq" value="monthly" />
+                    <span>Monthly</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Dynamic Results Box -->
+            <div class="calc-result-card">
+              <div class="result-card-header">
+                <span class="res-sub">Maturity Projection</span>
+                <div class="res-rate-tag" id="effectiveRateTag">Effective Rate: 8.50% p.a.</div>
+              </div>
+
+              <!-- Total Maturity Big Value -->
+              <div class="maturity-highlight">
+                <span class="mat-label">Total Maturity Value</span>
+                <span class="mat-number" id="maturityValueDisplay">₹6,40,909</span>
+              </div>
+
+              <!-- Breakdown Rows -->
+              <div class="result-breakdown">
+                <div class="breakdown-row">
+                  <span class="break-label">
+                    <span class="legend-dot bg-blue"></span>
+                    Principal Amount
+                  </span>
+                  <span class="break-val" id="principalBreakdown">₹5,00,000</span>
+                </div>
+                <div class="breakdown-row">
+                  <span class="break-label">
+                    <span class="legend-dot bg-gold"></span>
+                    Estimated Interest Earned
+                  </span>
+                  <span class="break-val text-gold" id="interestBreakdown">₹1,40,909</span>
+                </div>
+              </div>
+
+              <!-- Visual Progress Proportion Bar -->
+              <div class="calc-progress-track">
+                <div class="calc-progress-fill" id="calcProgressFill" style="width: 78%;"></div>
+              </div>
+              <div class="progress-labels">
+                <span>Principal (<span id="principalPct">78%</span>)</span>
+                <span>Wealth Gain (<span id="interestPct">22%</span>)</span>
+              </div>
+
+              <!-- Call to Action -->
+              <div class="calc-action-box">
+                <button class="btn btn-primary btn-full" id="lockRateBtn">
+                  <span>Lock in This Rate</span>
+                  <i data-lucide="check-circle" class="btn-icon"></i>
+                </button>
+                <p class="calc-note">
+                  <i data-lucide="info" class="icon-inline"></i>
+                  Interest rates are subject to periodic revision. Compounded annually.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Interactive Stock Performance / Growth Chart -->
+    <section class="section-performance" id="performance">
+      <div class="container">
+        <div class="section-header text-center" data-animate="fade-up">
+          <div class="badge-pill mx-auto">
+            <i data-lucide="line-chart" class="icon-xs"></i>
+            <span>Investor Relations & Market Capital</span>
+          </div>
+          <h2 class="section-title">Long-Term Wealth Creation Trajectory</h2>
+          <p class="section-subtitle">
+            Historical stock performance (NSE: BAJFINANCE) reflecting consistent fundamental compounding and robust governance.
+          </p>
+
+          <!-- Timeframe Selector Tabs -->
+          <div class="chart-timeframes" role="group" aria-label="Stock Timeframe">
+            <button class="tf-btn" data-timeframe="1Y">1 Year</button>
+            <button class="tf-btn active" data-timeframe="3Y">3 Years</button>
+            <button class="tf-btn" data-timeframe="5Y">5 Years</button>
+            <button class="tf-btn" data-timeframe="ALL">All Time</button>
+          </div>
+        </div>
+
+        <!-- Chart Container Card -->
+        <div class="chart-wrapper-card" data-animate="fade-up">
+          <div class="chart-header-stats">
+            <div>
+              <span class="chart-curr-price" id="chartPriceHeader">₹6,942.50</span>
+              <span class="chart-curr-change up" id="chartChangeHeader">▲ +124.6% in Selected Period</span>
+            </div>
+            <div class="chart-source-tag">
+              <span class="status-live-dot"></span>
+              <span>NSE: BAJFINANCE • INR</span>
+            </div>
+          </div>
+
+          <div class="chart-canvas-container">
+            <canvas id="stockPerformanceChart"></canvas>
+          </div>
+
+          <!-- Bottom Market Metrics Grid -->
+          <div class="market-stats-row">
+            <div class="market-stat-item">
+              <span class="m-stat-title">Market Capitalization</span>
+              <span class="m-stat-val">₹4,29,500 Cr</span>
+            </div>
+            <div class="market-stat-item">
+              <span class="m-stat-title">52-Week Range</span>
+              <span class="m-stat-val">₹6,364 - ₹7,810</span>
+            </div>
+            <div class="market-stat-item">
+              <span class="m-stat-title">P/E Ratio</span>
+              <span class="m-stat-val">29.7x</span>
+            </div>
+            <div class="market-stat-item">
+              <span class="m-stat-title">Gross NPA / Net NPA</span>
+              <span class="m-stat-val">0.85% / 0.31%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Corporate Timeline / Milestones -->
+    <section class="section-milestones" id="milestones">
+      <div class="container">
+        <div class="section-header text-center" data-animate="fade-up">
+          <div class="badge-pill mx-auto">
+            <i data-lucide="compass" class="icon-xs"></i>
+            <span>Our Journey of Innovation</span>
+          </div>
+          <h2 class="section-title">Milestones Shaping India's Financial Landscape</h2>
+          <p class="section-subtitle">
+            From a focused captive two-wheeler financier to India's most diversified retail fintech giant.
+          </p>
+        </div>
+
+        <div class="timeline" data-animate="fade-up">
+          <div class="timeline-line"></div>
+
+          <!-- Item 1 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">1987</span>
+              <h3 class="timeline-title">Inception & Incorporation</h3>
+              <p class="timeline-desc">
+                Founded as Bajaj Auto Finance Ltd, initially financing two and three-wheeler vehicles across India.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2008</span>
+              <h3 class="timeline-title">Retail NBFC Transformation</h3>
+              <p class="timeline-desc">
+                Rebranded to Bajaj Finance Limited; pioneered zero-cost consumer durable financing and SME loans.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2014</span>
+              <h3 class="timeline-title">EMI Network Card Revolution</h3>
+              <p class="timeline-desc">
+                Crossed 10 million active customers and introduced the digital EMI card network, redefining retail checkout.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2019</span>
+              <h3 class="timeline-title">Crossed ₹1,00,000 Cr AUM</h3>
+              <p class="timeline-desc">
+                Became the largest non-bank deposit-taker in India, backed by CRISIL & ICRA highest AAA safety ratings.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2023</span>
+              <h3 class="timeline-title">Omnichannel Super-App Ecosystem</h3>
+              <p class="timeline-desc">
+                Launched full-suite digital marketplace uniting lending, insurance, payments, investments, and UPI.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot current"></div>
+            <div class="timeline-content highlight">
+              <span class="timeline-year">Today</span>
+              <h3 class="timeline-title">88M+ Customers & ₹3.5L+ Cr AUM</h3>
+              <p class="timeline-desc">
+                Recognized as one of the most profitable, technologically advanced, and trusted financial institutions in Asia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. High-Impact CTA Banner -->
+    <section class="section-cta">
+      <div class="container">
+        <div class="cta-banner" data-animate="fade-up">
+          <div class="cta-content">
+            <h2 class="cta-title">Ready to Accelerate Your Financial Future?</h2>
+            <p class="cta-desc">
+              Experience seamless digital loan approvals, high-yield fixed deposits, and wealth solutions today.
+            </p>
+            <div class="cta-btn-group">
+              <button class="btn btn-white btn-lg" id="bannerApplyBtn">
+                <span>Open FD / Apply Now</span>
+                <i data-lucide="arrow-right"></i>
+              </button>
+              <a href="#calculator" class="btn btn-translucent btn-lg">
+                <span>Try Calculator</span>
+              </a>
+            </div>
+          </div>
+          <div class="cta-badges">
+            <div class="trust-pill-white">
+              <i data-lucide="shield-check"></i>
+              <span>AAA Rated Security</span>
+            </div>
+            <div class="trust-pill-white">
+              <i data-lucide="clock"></i>
+              <span>Instant Digital Disbursal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Application / Lead Modal -->
+  <dialog class="modal-dialog" id="applyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 class="modal-title">Begin Your Application</h3>
+          <p class="modal-subtitle">Quick paperless onboarding with instant preliminary evaluation.</p>
+        </div>
+        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close dialog">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="leadApplicationForm" class="modal-form">
+        <div class="form-group">
+          <label for="applicantName" class="form-label">Full Name (as per PAN / Aadhaar)</label>
+          <input type="text" id="applicantName" class="form-input" placeholder="e.g. Rahul Sharma" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="applicantMobile" class="form-label">Mobile Number</label>
+            <div class="input-with-prefix">
+              <span class="input-prefix">+91</span>
+              <input type="tel" id="applicantMobile" class="form-input" placeholder="98765 43210" pattern="[0-9]{10}" maxlength="10" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="applicantCity" class="form-label">City</label>
+            <input type="text" id="applicantCity" class="form-input" placeholder="e.g. Mumbai, Pune" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="selectedProduct" class="form-label">Interested Financial Product</label>
+          <select id="selectedProduct" class="form-select" required>
+            <option value="Fixed Deposits">Bajaj Finance Fixed Deposit (Up to 8.85%)</option>
+            <option value="Insta EMI Card">Bajaj Finserv Insta EMI Card</option>
+            <option value="Consumer Durable Loans">Consumer Durable & Digital Loan</option>
+            <option value="SME Business Loans">SME & Commercial Business Loan</option>
+            <option value="Mutual Funds">Direct Mutual Funds & Wealth Advisory</option>
+            <option value="Gold Loan">Gold Loan & Doorstep Valuation</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="desiredAmount" class="form-label">Preferred Investment / Loan Amount</label>
+          <input type="text" id="desiredAmount" class="form-input" placeholder="e.g. ₹5,00,000" />
+        </div>
+
+        <div class="form-disclaimer">
+          <label class="checkbox-label">
+            <input type="checkbox" required checked />
+            <span>I authorize Bajaj Finance Ltd to contact me via Call, SMS, WhatsApp & Email regarding this inquiry.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitLeadBtn">
+          <span>Submit Instant Inquiry</span>
+          <i data-lucide="check" class="btn-icon"></i>
+        </button>
+      </form>
+
+      <!-- Success Notification Box (Initially Hidden) -->
+      <div class="modal-success" id="modalSuccessState" style="display: none;">
+        <div class="success-icon-wrap">
+          <i data-lucide="check-circle" class="success-icon"></i>
+        </div>
+        <h3 class="success-title">Application Submitted Successfully!</h3>
+        <p class="success-desc">
+          Thank you, <strong id="successApplicantName">Applicant</strong>. Your application reference number is <span class="ref-num" id="applicationRefNum">BFL-8921-940</span>. Our relationship manager will connect within 15 minutes.
+        </p>
+        <button class="btn btn-outline btn-full" id="finishModalBtn">Done</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Toast Notification element -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+    <i data-lucide="info" class="toast-icon"></i>
+    <span class="toast-message" id="toastMessage">Notification</span>
+  </div>
+
+  <!-- Corporate Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top-grid">
+        <!-- Brand Column -->
+        <div class="footer-col brand-col">
+          <div class="brand-logo footer-logo">
+            <div class="logo-crest">
+              <svg viewBox="0 0 40 40" width="32" height="32" fill="none">
+                <rect width="40" height="40" rx="8" fill="#0072BC" />
+                <path d="M11 28V12L20 18L11 24V28Z" fill="#FFFFFF" />
+                <path d="M20 18L29 12V24L20 18Z" fill="#E5A93C" />
+              </svg>
+            </div>
+            <div class="brand-text">
+              <span class="brand-title">BAJAJ FINANCE</span>
+              <span class="brand-sub">LIMITED</span>
+            </div>
+          </div>
+          <p class="footer-about">
+            Bajaj Finance Limited, a subsidiary of Bajaj Finserv Ltd, is a deposit-taking Non-Banking Financial Company (NBFC-D) registered with the Reserve Bank of India (RBI).
+          </p>
+          <div class="corp-ratings">
+            <span class="rating-tag">CRISIL AAA / Stable</span>
+            <span class="rating-tag">ICRA AAA / Stable</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="#portfolio">Fixed Deposits</a></li>
+            <li><a href="#portfolio">Insta EMI Card</a></li>
+            <li><a href="#portfolio">Consumer Electronics Loans</a></li>
+            <li><a href="#portfolio">Business & MSME Loans</a></li>
+            <li><a href="#portfolio">Direct Mutual Funds</a></li>
+          </ul>
+        </div>
+
+        <!-- Calculators & Tools -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Calculators</h4>
+          <ul class="footer-links">
+            <li><a href="#calculator">Fixed Deposit Calculator</a></li>
+            <li><a href="#calculator">Personal Loan EMI</a></li>
+            <li><a href="#calculator">Business Loan Calculator</a></li>
+            <li><a href="#calculator">Mutual Fund SIP Planner</a></li>
+            <li><a href="#performance">Stock Growth Simulator</a></li>
+          </ul>
+        </div>
+
+        <!-- Governance & Contact -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Corporate Office</h4>
+          <address class="footer-address">
+            Bajaj Finance Limited<br />
+            4th Floor, Bajaj Finserv Corporate Office,<br />
+            Off Pune-Ahmednagar Road, Viman Nagar,<br />
+            Pune - 411014, Maharashtra, India.
+          </address>
+          <div class="footer-contact-info">
+            <span>Customer Care: +91 86980 10101</span>
+            <span>CIN: L65910MH1987PLC042961</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Regulatory NBFC Disclaimers & Statutory Compliance -->
+      <div class="footer-disclaimers">
+        <p>
+          <strong>Statutory Disclaimer:</strong> Bajaj Finance Limited is registered with the Reserve Bank of India as a Non-Banking Financial Institution. However, RBI does not accept any responsibility or guarantee regarding the present position as to the financial soundness of the Company or for the correctness of any of the statements or representations made. Fixed Deposits are accepted under Section 45-IA of the RBI Act, 1934.
+        </p>
+        <p>
+          Mutual Fund investments are subject to market risks; read all scheme-related documents carefully before investing. Historical returns are not indicative of future performance.
+        </p>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom">
+        <p class="copyright">
+          © 2026 Bajaj Finance Limited. All Rights Reserved. Built with modern web standards.
+        </p>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">RBI Fair Practice Code</a>
+          <a href="#">Ombudsman Scheme</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Files -->
+  <script src="app.js"></script>
+</body>
+</html>
